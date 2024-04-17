@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     void OnFire(InputValue value) //method called when bullet is fired
     {
         if (!isAlive) {return;}
+        myAnimator.SetTrigger("Shoot");
         Instantiate(bullet, gun.position, transform.rotation);
     }
  
@@ -57,12 +58,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GlobalVariables.instance.isInTextInput) {return;}
         if (!isAlive) {return;} //checks if player is alive
-        if(!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) {return;} //if not touching ground, dont proceed
+        if(!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "Bullets"))) {return;} //if not touching ground, dont proceed
         if(value.isPressed) //is the jump button pressed?
         {
             myRigidbody.velocity += new Vector2 (0f, jumpSpeed);
         }
     }
+
+    void OnHamAttack(InputValue value){
+        if(!isAlive){
+            return;
+        }
+        if(value.isPressed && myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))){
+            //transform.localScale = new Vector2(Mathf.Sign(myBody.velocity.x), 1f );
+            myAnimator.SetTrigger("Attack");
+        }
+    }
+
+
     void Run() //lets the player move horizontally
     {
         Vector2 playerVelocity = new Vector2 (moveInput.x * runSpeed, myRigidbody.velocity.y); //sets x and y movement speed, for x move runSpeed times faster, for y just keep same velocity you currently have
@@ -105,7 +118,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isAlive = false; //no longer alive
             myAnimator.SetTrigger("Dying"); //trigger dying state
+            myBodyCollider.enabled = false;
+            myFeetCollider.enabled = false;
             myRigidbody.velocity = deathKick; //trigger death animation
+            
+            
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
