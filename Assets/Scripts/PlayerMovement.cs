@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite(); //on every update time, flip sprite along y-axis if running the other way
         ClimbLadder(); //on every update time, climb the ladder
         Die(); //calls the die function
+        LevelLoop();
     }
 
     void OnFire(InputValue value) //method called when bullet is fired
@@ -107,6 +108,15 @@ public class PlayerMovement : MonoBehaviour
             myAnimator.SetTrigger("Dying"); //trigger dying state
             myRigidbody.velocity = deathKick; //trigger death animation
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
+        }
+    }
+
+    void LevelLoop()
+    {
+        if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Anvil")))
+        {
+            isAlive = false;
+            FindObjectOfType<GameSession>().ProcessLevelLoop();
         }
     }
 }

@@ -21,7 +21,7 @@ TagManager:
   - Hazards
   - Bullets
   - Interactables
-  - 
+  - Anvil
   - 
   - 
   - 
@@ -65,4 +65,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2188721987
+    locked: 0
+  - name: Anvil
+    uniqueID: 3371165839
     locked: 0
