@@ -7,6 +7,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject bossStarter;
+
+    public GameObject defCam;
+
+    public Camera boss;
     [SerializeField] float runSpeed = 10f; //float to scale the run speed
     [SerializeField] float jumpSpeed = 5f; //float to set the jump speed
     [SerializeField] float climbSpeed = 5f; //float to scale the climb speed
@@ -29,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
         myBodyCollider = GetComponent<CapsuleCollider2D>(); //on init, catch capsulecollider ref 
         myFeetCollider = GetComponent<BoxCollider2D>(); //on init, catch boxcollider ref
         gravityScaleAtStart = myRigidbody.gravityScale; //init gravityScale to current player gravity   
+        defCam.gameObject.SetActive(true);
+        
     }
 
     void Update()
@@ -44,6 +51,10 @@ public class PlayerMovement : MonoBehaviour
     void OnFire(InputValue value) //method called when bullet is fired
     {
         if (!isAlive) {return;}
+        var bullClone = GameObject.Find("Bullet2(Clone)");
+        if(bullClone){
+            Destroy(bullClone);
+        }
         myAnimator.SetTrigger("Shoot");
         Instantiate(bullet, gun.position, transform.rotation);
     }
@@ -126,4 +137,24 @@ public class PlayerMovement : MonoBehaviour
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
+
+
+    void OnTriggerEnter2D(Collider2D other) {
+       // Destroy(gameObject);
+       if(other.tag == "bossStart"){
+            StartCoroutine(waiter());
+            Destroy(other.gameObject);
+            //System.Threading.Thread.Sleep(10000);
+            //bossStarter.SetActive(false);
+       }
+    }
+
+    IEnumerator waiter()
+{
+    bossStarter.SetActive(true);
+    yield return new WaitForSeconds(3);
+    bossStarter.SetActive(false);
+}
+
+
 }

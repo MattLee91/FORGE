@@ -11,18 +11,23 @@ public class Bullet : MonoBehaviour
     PlayerMovement player;
     float xSpeed;
 
+    GameObject bullClone;
+
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerMovement>();
         xSpeed = player.transform.localScale.x * bulletSpeed;
         transform.localScale = new Vector2((Mathf.Sign(xSpeed)), 1f );
+
+        
     }
 
     void Update()
     {   if(!isStuck){
             myRigidbody.velocity = new Vector2 (xSpeed, 0f);
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D other) 
