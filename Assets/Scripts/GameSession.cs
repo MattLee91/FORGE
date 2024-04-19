@@ -9,6 +9,7 @@ public class GameSession : MonoBehaviour
 {
     [SerializeField] int playerLives = 3;
     [SerializeField] int score = 0;
+    [SerializeField] int levelCounter = 3;
 
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI scoreText;
@@ -45,6 +46,20 @@ public class GameSession : MonoBehaviour
         }
     }
 
+    public void ProcessLevelLoop()
+    {
+        if (levelCounter > 1)
+        {
+            levelCounter--;
+        }
+        else
+        {
+            levelCounter = 3;
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene("Start Menu");
+        }
+    }
+
     public void AddToScore(int pointsToAdd)
     {
         score += pointsToAdd;
@@ -54,6 +69,8 @@ public class GameSession : MonoBehaviour
     void TakeLife()
     {
         playerLives--;
+        levelCounter--;
+        GlobalVariables.instance.levelCount--;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
         livesText.text = playerLives.ToString();

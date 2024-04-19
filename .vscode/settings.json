@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "FORGE.sln"
+    "dotnet.defaultSolution": "FORGE.sln",
+    "dotnet.preferCSharpExtension": true
 }

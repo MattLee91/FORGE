@@ -8,6 +8,8 @@ public class GlobalVariables : MonoBehaviour
 
     public bool isInTextInput = false;
 
+    public int levelCount = 3;
+
     private void Awake()
     {
         if (instance == null)
