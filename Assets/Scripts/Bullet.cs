@@ -6,19 +6,28 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] float bulletSpeed = 15f;
     Rigidbody2D myRigidbody;
+
+    bool isStuck = false;
     PlayerMovement player;
     float xSpeed;
+
+    GameObject bullClone;
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerMovement>();
         xSpeed = player.transform.localScale.x * bulletSpeed;
+        transform.localScale = new Vector2((Mathf.Sign(xSpeed)), 1f );
+
+        
     }
 
     void Update()
-    {
-        myRigidbody.velocity = new Vector2 (xSpeed, 0f);
+    {   if(!isStuck){
+            myRigidbody.velocity = new Vector2 (xSpeed, 0f);
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other) 
@@ -32,6 +41,9 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) 
     {
-        Destroy(gameObject);
+        if(other.collider.tag != "Player"){
+        myRigidbody.bodyType = RigidbodyType2D.Static;
+        isStuck = true;
+       }
     }
 }

@@ -7,6 +7,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject bossStarter;
+
+    public GameObject defCam;
+
+    public Camera boss;
     [SerializeField] float runSpeed = 10f; //float to scale the run speed
     [SerializeField] float jumpSpeed = 5f; //float to set the jump speed
     [SerializeField] float climbSpeed = 5f; //float to scale the climb speed
@@ -29,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
         myBodyCollider = GetComponent<CapsuleCollider2D>(); //on init, catch capsulecollider ref 
         myFeetCollider = GetComponent<BoxCollider2D>(); //on init, catch boxcollider ref
         gravityScaleAtStart = myRigidbody.gravityScale; //init gravityScale to current player gravity   
+        defCam.gameObject.SetActive(true);
+        
     }
 
     void Update()
@@ -45,6 +52,11 @@ public class PlayerMovement : MonoBehaviour
     void OnFire(InputValue value) //method called when bullet is fired
     {
         if (!isAlive) {return;}
+        var bullClone = GameObject.Find("Bullet2(Clone)");
+        if(bullClone){
+            Destroy(bullClone);
+        }
+        myAnimator.SetTrigger("Shoot");
         Instantiate(bullet, gun.position, transform.rotation);
     }
  
@@ -58,12 +70,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GlobalVariables.instance.isInTextInput) {return;}
         if (!isAlive) {return;} //checks if player is alive
-        if(!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) {return;} //if not touching ground, dont proceed
+        if(!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "Bullets"))) {return;} //if not touching ground, dont proceed
         if(value.isPressed) //is the jump button pressed?
         {
             myRigidbody.velocity += new Vector2 (0f, jumpSpeed);
         }
     }
+
+    void OnHamAttack(InputValue value){
+        if(!isAlive){
+            return;
+        }
+        if(value.isPressed && myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))){
+            //transform.localScale = new Vector2(Mathf.Sign(myBody.velocity.x), 1f );
+            myAnimator.SetTrigger("Attack");
+        }
+    }
+
+
     void Run() //lets the player move horizontally
     {
         Vector2 playerVelocity = new Vector2 (moveInput.x * runSpeed, myRigidbody.velocity.y); //sets x and y movement speed, for x move runSpeed times faster, for y just keep same velocity you currently have
@@ -106,7 +130,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isAlive = false; //no longer alive
             myAnimator.SetTrigger("Dying"); //trigger dying state
+            myBodyCollider.enabled = false;
+            myFeetCollider.enabled = false;
             myRigidbody.velocity = deathKick; //trigger death animation
+            
+            
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
@@ -119,4 +147,22 @@ public class PlayerMovement : MonoBehaviour
             FindObjectOfType<GameSession>().ProcessLevelLoop();
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other) {
+       // Destroy(gameObject);
+       if(other.tag == "bossStart"){
+            StartCoroutine(waiter());
+            Destroy(other.gameObject);
+            //System.Threading.Thread.Sleep(10000);
+            //bossStarter.SetActive(false);
+       }
+    }
+
+    IEnumerator waiter()
+{
+    bossStarter.SetActive(true);
+    yield return new WaitForSeconds(3);
+    bossStarter.SetActive(false);
+}
+
 }
