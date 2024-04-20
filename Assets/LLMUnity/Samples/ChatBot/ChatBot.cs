@@ -77,6 +77,7 @@ namespace LLMUnitySamples
             // print the message to the console
             Debug.Log("Original Message: " + message);
             
+            /* PLOT STAGE DETECTION */
             // check if the original message contains the word "exposition" (case-insensitive) and if it does, assign plotStage to 1.
             if (message.ToLower().Contains("exposition"))
             {
@@ -107,8 +108,52 @@ namespace LLMUnitySamples
             {
                 plotStage = 6;
             }
+            // debug log the plot stage
+            Debug.Log("Plot Stage: " + plotStage);
 
-            // 
+            /* GENRE DETECTION */
+            // check if the original message contains the word "mystery" (case-insensitive) and if it does, assign genre to "mystery".
+            if (message.ToLower().Contains("mystery"))
+            {
+                genre = "mystery";
+            }
+            // check if the original message contains the word "fantasy" (case-insensitive) and if it does, assign genre to "fantasy".
+            else if (message.ToLower().Contains("fantasy"))
+            {
+                genre = "fantasy";
+            }
+            // check if the original message contains the word "science fiction" or "sci fi" or "sci-fi" or "scifi" (case-insensitive) and if it does, assign genre to "scifi".
+            else if (message.ToLower().Contains("science fiction") || message.ToLower().Contains("sci fi") || message.ToLower().Contains("sci-fi") || message.ToLower().Contains("scifi"))
+            {
+                genre = "sci_fi";
+            }
+            // check if the original message contains the word "romance" (case-insensitive) and if it does, assign genre to "romance".
+            else if (message.ToLower().Contains("romance"))
+            {
+                genre = "romance";
+            }
+            // check if the original message contains the word "horror" (case-insensitive) and if it does, assign genre to "horror".
+            else if (message.ToLower().Contains("horror"))
+            {
+                genre = "horror";
+            }
+            // check if the original message contains the word "comedy" (case-insensitive) and if it does, assign genre to "comedy".
+            else if (message.ToLower().Contains("comedy"))
+            {
+                genre = "comedy";
+            }
+            // check if the original message contains the word "drama" (case-insensitive) and if it does, assign genre to "drama".
+            else if (message.ToLower().Contains("drama"))
+            {
+                genre = "drama";
+            }
+            // check if the original message contains the word "fairy tale" or "fairytale" or "fairy-tale" or "folk tale" or "folktale" or "folk-tale" (case-insensitive) and if it does, assign genre to "tale".
+            else if (message.ToLower().Contains("fairy tale") || message.ToLower().Contains("fairytale") || message.ToLower().Contains("fairy-tale") || message.ToLower().Contains("folk tale") || message.ToLower().Contains("folktale") || message.ToLower().Contains("folk-tale"))
+            {
+                genre = "tale";
+            }
+            // debug log the genre
+            Debug.Log("Genre: " + genre);
             
             // append a string to the player's message telling the chatbot to prepend their message with "Response: "
             string augmentedMessage = message + "\n Please start every response with: Gotcha!";
@@ -119,14 +164,14 @@ namespace LLMUnitySamples
             inputBubble.SetText("");
         }
 
-        // create a function to choose a random .txt file from a folder given a filepath
-        public string ChooseRandomFile(string folderPath)
+        // a function to choose a random .txt file from the "Assets/Literature/(genre)" folder given genre as a string input
+        public string ChooseRandomText(string genre)
         {
-            // get all the files in the folder
-            string[] files = System.IO.Directory.GetFiles(folderPath);
-            // choose a random file
+            // get all the .txt files in the "Assets/Literature/(genre)" folder
+            string[] files = System.IO.Directory.GetFiles("Assets/Literature/" + genre, "*.txt");
+            // choose a random .txt file from the files array
             string randomFile = files[Random.Range(0, files.Length)];
-            // return the random file
+            // return the path of the random .txt file
             return randomFile;
         }
 
