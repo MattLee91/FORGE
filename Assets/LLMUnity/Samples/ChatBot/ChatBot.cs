@@ -18,7 +18,8 @@ namespace LLMUnitySamples
         public float textPadding = 10f;
         public float bubbleSpacing = 10f;
         public Sprite sprite;
-
+        public int plotStage = -1;
+        public string genre;
         private InputBubble inputBubble;
         private List<Bubble> chatBubbles = new List<Bubble>();
         private bool blockInput = true;
@@ -75,6 +76,40 @@ namespace LLMUnitySamples
 
             // print the message to the console
             Debug.Log("Original Message: " + message);
+            
+            // check if the original message contains the word "exposition" (case-insensitive) and if it does, assign plotStage to 1.
+            if (message.ToLower().Contains("exposition"))
+            {
+                plotStage = 1;
+            }
+            // check if the original message contains the word "conflict" (case-insensitive) and if it does, assign plotStage to 2.
+            else if (message.ToLower().Contains("conflict"))
+            {
+                plotStage = 2;
+            }
+            // check if the original message contains the word "rising action" (case-insensitive) and if it does, assign plotStage to 3.
+            else if (message.ToLower().Contains("rising action"))
+            {
+                plotStage = 3;
+            }
+            // check if the original message contains the word "climax" (case-insensitive) and if it does, assign plotStage to 4.
+            else if (message.ToLower().Contains("climax"))
+            {
+                plotStage = 4;
+            }
+            // check if the original message contains the word "falling action" (case-insensitive) and if it does, assign plotStage to 5.
+            else if (message.ToLower().Contains("falling action"))
+            {
+                plotStage = 5;
+            }
+            // check if the original message contains the word "resolution" (case-insensitive) and if it does, assign plotStage to 6.
+            else if (message.ToLower().Contains("resolution"))
+            {
+                plotStage = 6;
+            }
+
+            // 
+            
             // append a string to the player's message telling the chatbot to prepend their message with "Response: "
             string augmentedMessage = message + "\n Please start every response with: Gotcha!";
             // print the augmented message to the console
@@ -82,6 +117,17 @@ namespace LLMUnitySamples
 
             Task chatTask = llm.Chat(augmentedMessage, aiBubble.SetText, AllowInput);
             inputBubble.SetText("");
+        }
+
+        // create a function to choose a random .txt file from a folder given a filepath
+        public string ChooseRandomFile(string folderPath)
+        {
+            // get all the files in the folder
+            string[] files = System.IO.Directory.GetFiles(folderPath);
+            // choose a random file
+            string randomFile = files[Random.Range(0, files.Length)];
+            // return the random file
+            return randomFile;
         }
 
         public void WarmUpCallback()
