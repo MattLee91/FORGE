@@ -73,7 +73,14 @@ namespace LLMUnitySamples
             playerBubble.OnResize(UpdateBubblePositions);
             aiBubble.OnResize(UpdateBubblePositions);
 
-            Task chatTask = llm.Chat(message, aiBubble.SetText, AllowInput);
+            // print the message to the console
+            Debug.Log("Original Message: " + message);
+            // append a string to the player's message telling the chatbot to prepend their message with "Response: "
+            string augmentedMessage = message + "\n Please start every response with: Gotcha!";
+            // print the augmented message to the console
+            Debug.Log("Augmented_Message: " + augmentedMessage);
+
+            Task chatTask = llm.Chat(augmentedMessage, aiBubble.SetText, AllowInput);
             inputBubble.SetText("");
         }
 
