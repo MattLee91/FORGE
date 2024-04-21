@@ -52,6 +52,8 @@ public class TextGenerator : MonoBehaviour
         GameObject textGO = new GameObject("TextObject");
         TextMesh textMesh = textGO.AddComponent<TextMesh>();
         textMesh.text = GlobalVariables.instance.AITextResult;
+        //this is where we parse the output from the model into chunks
+        textArray = parseInput(textMesh.text);
         textMesh.fontSize = 10;
 
         // Create a Box Collider that fits the text
@@ -120,9 +122,16 @@ public class TextGenerator : MonoBehaviour
     public void ReadStringInput(string s)
     {
         sharedString = s;
-        textArray = sharedString.Split(' ');
         Debug.Log(sharedString);
         GlobalVariables.instance.message = s;
+    }
+
+    //takes in string input, and slices the sentence into words which are then randomly? selected to be used in platform generation
+    public string[] parseInput(string s)
+    {
+        string[] temp = new string[15];
+        s.Split(' ');
+        return temp;
     }
 
 }
