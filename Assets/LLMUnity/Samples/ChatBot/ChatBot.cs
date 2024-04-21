@@ -178,6 +178,10 @@ namespace LLMUnitySamples
             string randomTextPath = randomTextOutput[0];
             string textTitle = randomTextOutput[1];
             string textAuthor = randomTextOutput[2];
+            // debug all three
+            UnityEngine.Debug.Log("Random Text Path: " + randomTextPath);
+            UnityEngine.Debug.Log("Text Title: " + textTitle);
+            UnityEngine.Debug.Log("Text Author: " + textAuthor);
 
             // extract a portion of the text corresponding to the plot stage
             string extractedText = ExtractText(randomTextPath);
@@ -227,7 +231,7 @@ namespace LLMUnitySamples
             if (!System.IO.Directory.Exists(literaturePath))
             {
                 UnityEngine.Debug.LogError("The folder for the genre " + genre + " does not exist.");
-                return "ERROR: Folder does not exist.";
+                return new string[] {"ERROR: Folder does not exist.", "ERROR: Folder does not exist.", "ERROR: Folder does not exist."};
             }
 
             // within the "Assets/Literature/(genre)" folder, there are folders named after authors; within them, a random file is selected.
@@ -249,7 +253,7 @@ namespace LLMUnitySamples
             if (files.Length == 0)
             {
                 UnityEngine.Debug.LogError("There are no .txt files in the folder " + folderName);
-                return "ERROR: No .txt files in the folder.";
+                return new string[] {"ERROR: No .txt files in the folder.", "ERROR: No .txt files in the folder.", "ERROR: No .txt files in the folder."};
             }
 
             // choose a random .txt file from the files array
