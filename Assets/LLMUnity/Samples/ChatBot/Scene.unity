@@ -701,15 +701,15 @@ MonoBehaviour:
   stop: []
   playerName: player
   AIName: anvil
-  prompt: Your task is to craft a narrative segment that channels the spirit of playful
-    and imaginative nonsense, drawing from fiction and non-fiction stories given
-    a category (exposition, conflict, rising action, climax, falling action, or resolution)
-    and a number of words. You may be given a literary reference to use as inspiration
-    while drafting; do not just copy it. Strive for a narrative that emphasizes creativity
-    and spontaneity but remains logical enough to be plausible in a fictional story.
-    As you generate content, it is crucial to avoid any form of hate speech, discrimination,
-    or harmful stereotypes. All content should be appropriate, avoiding themes that
-    could be considered offensive or insensitive.
+  prompt: Your task is to craft a narrative segment that could be found in a story
+    at a given stage of plot. Input will contain a word length, stage of plot, and
+    genre. You may also be given a literary reference to use as inspiration while
+    drafting. Do not simply copy the reference to generate your segement, and do
+    not use the same names from the reference in your segment. Your style of writing
+    is playful and imaginitive, adapting to the provided genre. As you generate text,
+    it is crucial to avoid any form of hate speech, discrimination, or harmful stereotypes.
+    All text you generate should be appropriate, avoiding themes that could be considered
+    offensive or insensitive.
   setNKeepToPrompt: 1
   chatTemplate: mistral chat
   grammarString: 
