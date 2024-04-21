@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TextGenerator : MonoBehaviour
 {
     public static TextGenerator instance;
 
     public string sharedString;
+
+    string[] textArray = new string[10];
+    float[] xCoords = {1f, 3f, 5f, 7f, 9f, 11f, 13f, 15f, 17f, 19f};
+    float[] yCoords = {-0.5f,-0.5f,-0.5f,-0.5f,-0.5f,-0.5f,-0.5f,-0.5f,-0.5f,-0.5f,};
 
     private void Awake()
     {
@@ -25,8 +30,11 @@ public class TextGenerator : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sharedString))
         {
-            CreateTextObject();
-            sharedString = ""; // Clear the string after creating the object
+            if(SceneManager.GetActiveScene().name != "Start Map")
+            {
+                CreateTextSide();
+                sharedString = ""; // Clear the string after creating the object
+            }
         }
     }
 
@@ -70,9 +78,41 @@ public class TextGenerator : MonoBehaviour
         textGO.transform.position = randomPosition;
     }
 
+    void CreateTextSide()
+    {
+
+        for(int i=0; i<textArray.Length; i++)
+        {
+            GameObject textGO = new GameObject("TextObject");
+            TextMesh textMesh = textGO.AddComponent<TextMesh>();
+            textMesh.text = textArray[i];
+            textMesh.fontSize = 10;
+
+        // Create a Box Collider that fits the text
+            Bounds textBounds = new Bounds(textMesh.transform.position, Vector3.zero);
+            MeshRenderer meshRenderer = textGO.GetComponent<MeshRenderer>();
+            textBounds = meshRenderer.bounds;
+
+            BoxCollider2D boxCollider2D = textGO.AddComponent<BoxCollider2D>();
+            boxCollider2D.size = new Vector2(textBounds.size.x, textBounds.size.y);
+            boxCollider2D.offset = new Vector2(textBounds.center.x, textBounds.center.y);
+            boxCollider2D.gameObject.layer = LayerMask.NameToLayer("Ground");
+
+            MeshRenderer textRenderer = textGO.GetComponent<MeshRenderer>();
+            int platformLayerID = SortingLayer.NameToID("Platforms");
+            textRenderer.sortingLayerID = platformLayerID;
+            textRenderer.sortingOrder = 0; // Adjust this value to control the sorting order
+
+            Vector3 setPosition = new Vector3(xCoords[i],yCoords[i],0);
+
+            textGO.transform.position = setPosition;
+        }
+    }
+
     public void ReadStringInput(string s)
     {
         sharedString = s;
+        textArray = sharedString.Split(' ');
         Debug.Log(sharedString);
     }
 

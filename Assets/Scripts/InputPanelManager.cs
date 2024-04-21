@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,14 @@ public class InputPanelManager : MonoBehaviour
         {
             GlobalVariables.instance.isInTextInput = false;
         }
+
+        /*if(GlobalVariables.instance.isInAnvilArea && Input.GetKeyDown(KeyCode.T))
+        {
+            if(!textInputPanel.activeSelf)
+            {
+                textInputPanel.SetActive(true);
+            }
+        }*/
         if(Input.GetKeyDown(KeyCode.T))
         {
             if(!textInputPanel.activeSelf)
@@ -30,10 +39,11 @@ public class InputPanelManager : MonoBehaviour
                 textInputPanel.SetActive(true);
             }
         }
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            textInputPanel.SetActive(false);
-        }
+
+        //if(Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    textInputPanel.SetActive(false);
+        //}
     }
 
     public void ReadStringInput(string s)

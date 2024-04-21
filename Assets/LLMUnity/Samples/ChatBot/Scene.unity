@@ -699,17 +699,12 @@ MonoBehaviour:
   ignoreEos: 0
   nKeep: -1
   stop: []
-  playerName: player
-  AIName: anvil
-  prompt: Your task is to craft a narrative segment that could be found in a story
-    at a given stage of plot. Input will contain a word length, stage of plot, and
-    genre. You may also be given a literary reference to use as inspiration while
-    drafting. Do not simply copy the reference to generate your segement, and do
-    not use the same names from the reference in your segment. Your style of writing
-    is playful and imaginitive, adapting to the provided genre. As you generate text,
-    it is crucial to avoid any form of hate speech, discrimination, or harmful stereotypes.
-    All text you generate should be appropriate, avoiding themes that could be considered
-    offensive or insensitive.
+  grammarString: 
+  playerName: user
+  AIName: assistant
+  prompt: A chat between a curious human and an artificial intelligence assistant.
+    The assistant gives helpful, detailed, and polite answers to the human's questions.
+  chatTemplate: chatml
   setNKeepToPrompt: 1
   chatTemplate: mistral chat
   grammarString: 
@@ -724,7 +719,7 @@ MonoBehaviour:
   lora: 
   contextSize: 512
   batchSize: 512
-  SelectedModel: 0
+  SelectedModel: 1
   modelProgress: 1
   modelCopyProgress: 1
   modelHide: 1

@@ -7,6 +7,8 @@ public class GlobalVariables : MonoBehaviour
     public static GlobalVariables instance;
 
     public bool isInTextInput = false;
+    public bool isInAnvilArea = false;
+    public bool hasIntWithAnvil1 = false;
 
     public int levelCount = 3;
 
