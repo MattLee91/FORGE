@@ -156,6 +156,19 @@ public class PlayerMovement : MonoBehaviour
             //System.Threading.Thread.Sleep(10000);
             //bossStarter.SetActive(false);
        }
+       if(other.tag == "Anvil")
+        {
+            Debug.Log("we are touching the anvil");
+            GlobalVariables.instance.isInAnvilArea = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.tag == "Anvil")
+        {
+            GlobalVariables.instance.isInAnvilArea = false;
+        }
     }
 
     IEnumerator waiter()
