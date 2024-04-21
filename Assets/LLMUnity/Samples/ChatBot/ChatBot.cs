@@ -154,6 +154,9 @@ namespace LLMUnitySamples
             }
             // debug log the genre
             Debug.Log("Genre: " + genre);
+
+            // find a random text corresponding to that genre
+            string randomText = ChooseRandomText(genre);
             
             // append a string to the player's message telling the chatbot to prepend their message with "Response: "
             string augmentedMessage = message + "\n Please start every response with: Gotcha!";
@@ -167,10 +170,49 @@ namespace LLMUnitySamples
         // a function to choose a random .txt file from the "Assets/Literature/(genre)" folder given genre as a string input
         public string ChooseRandomText(string genre)
         {
-            // get all the .txt files in the "Assets/Literature/(genre)" folder
-            string[] files = System.IO.Directory.GetFiles("Assets/Literature/" + genre, "*.txt");
+            // the current relative path is: Assets\LLMUnity\Samples\ChatBot\ChatBot.cs
+            // the relative path to the literature is: Assets\Literature
+
+            // define the path to the literature folder for the given genre
+            string literaturePath = Application.dataPath + "/Literature/" + genre;
+
+            // include error handling if folder does not exist for that genre
+            if (!System.IO.Directory.Exists(literaturePath))
+            {
+                Debug.LogError("The folder for the genre " + genre + " does not exist.");
+                return "ERROR: Folder does not exist.";
+            }
+
+            // within the "Assets/Literature/(genre)" folder, there are folders named after authors; within them, a random file is selected.
+            // get all the folders in the "Assets/Literature/(genre)" folder
+            string[] folders = System.IO.Directory.GetDirectories(literaturePath);
+
+            // choose a random folder from the folders array
+            string randomFolder = folders[Random.Range(0, folders.Length)];
+
+            // save the folder name
+            string folderName = System.IO.Path.GetFileName(randomFolder);
+            // debug log the folder name
+            Debug.Log("Folder Name: " + folderName);
+
+            // get all the .txt files in the random folder
+            string[] files = System.IO.Directory.GetFiles(randomFolder, "*.txt");
+
+            // include error handling if there are no .txt files in the folder
+            if (files.Length == 0)
+            {
+                Debug.LogError("There are no .txt files in the folder " + folderName);
+                return "ERROR: No .txt files in the folder.";
+            }
+
             // choose a random .txt file from the files array
             string randomFile = files[Random.Range(0, files.Length)];
+            
+            // save the file name
+            string fileName = System.IO.Path.GetFileName(randomFile);
+            // debug log the file name
+            Debug.Log("File Name: " + fileName);
+
             // return the path of the random .txt file
             return randomFile;
         }
