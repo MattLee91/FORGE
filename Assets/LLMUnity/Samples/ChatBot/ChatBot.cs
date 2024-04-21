@@ -172,7 +172,7 @@ namespace LLMUnitySamples
             UnityEngine.Debug.Log("Genre: " + genre);
 
             // construct an augmented message based on the genre and plot stage
-            string augmentedMessage = "word length: 150, " + "stage of plot: " + plotStage + ", " + "genre: " + genre + ".";
+            string augmentedMessage = "150 words, " + plotStage + ", " + genre + ".";
 
             // store the output of ChooseRandomText in an array.
             // the first item is the text's file path, the second is the text's title, and the third is the text's author
