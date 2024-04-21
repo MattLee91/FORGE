@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using LLMUnity;
 using System.ComponentModel;
 using System.Diagnostics;
+using System;
 
 namespace LLMUnitySamples
 {
@@ -20,7 +21,7 @@ namespace LLMUnitySamples
         public float textPadding = 10f;
         public float bubbleSpacing = 10f;
         public Sprite sprite;
-        public int plotStage = -1;
+        public string plotStage;
         public string genre;
         public int expositionStart = 0;
         public int expositionEnd = 10;
@@ -93,35 +94,35 @@ namespace LLMUnitySamples
             UnityEngine.Debug.Log("Original Message: " + message);
             
             /* PLOT STAGE DETECTION */
-            // check if the original message contains the word "exposition" (case-insensitive) and if it does, assign plotStage to 1.
+            // check if the original message contains the word "exposition" (case-insensitive) and if it does, assign plotStage to it.
             if (message.ToLower().Contains("exposition"))
             {
-                plotStage = 1;
+                plotStage = "exposition";
             }
-            // check if the original message contains the word "conflict" (case-insensitive) and if it does, assign plotStage to 2.
+            // check if the original message contains the word "conflict" (case-insensitive) and if it does, assign plotStage to it.
             else if (message.ToLower().Contains("conflict"))
             {
-                plotStage = 2;
+                plotStage = "conflict";
             }
-            // check if the original message contains the word "rising action" (case-insensitive) and if it does, assign plotStage to 3.
+            // check if the original message contains the word "rising action" (case-insensitive) and if it does, assign plotStage to it.
             else if (message.ToLower().Contains("rising action"))
             {
-                plotStage = 3;
+                plotStage = "rising action";
             }
-            // check if the original message contains the word "climax" (case-insensitive) and if it does, assign plotStage to 4.
+            // check if the original message contains the word "climax" (case-insensitive) and if it does, assign plotStage to it.
             else if (message.ToLower().Contains("climax"))
             {
-                plotStage = 4;
+                plotStage = "climax";
             }
-            // check if the original message contains the word "falling action" (case-insensitive) and if it does, assign plotStage to 5.
+            // check if the original message contains the word "falling action" (case-insensitive) and if it does, assign plotStage to it.
             else if (message.ToLower().Contains("falling action"))
             {
-                plotStage = 5;
+                plotStage = "falling action";
             }
-            // check if the original message contains the word "resolution" (case-insensitive) and if it does, assign plotStage to 6.
+            // check if the original message contains the word "resolution" (case-insensitive) and if it does, assign plotStage to it.
             else if (message.ToLower().Contains("resolution"))
             {
-                plotStage = 6;
+                plotStage = "resolution";
             }
             // debug log the plot stage
             UnityEngine.Debug.Log("Plot Stage: " + plotStage);
@@ -170,14 +171,20 @@ namespace LLMUnitySamples
             // debug log the genre
             UnityEngine.Debug.Log("Genre: " + genre);
 
+            // construct an augmented message based on the genre and plot stage
+            string augmentedMessage = "word length: 150, " + "stage of plot: " + plotStage + ", " + "genre: " + genre + ".";
+
             // store the output of ChooseRandomText in an array.
             // the first item is the text's file path, the second is the text's title, and the third is the text's author
             string[] randomTextOutput = ChooseRandomText(genre);
 
             // decompose the string array into three strings
             string randomTextPath = randomTextOutput[0];
-            string textTitle = randomTextOutput[1];
-            string textAuthor = randomTextOutput[2];
+
+            // the text title needs the ".txt" suffix removed
+            string textTitle = randomTextOutput[1].Replace(".txt", ""); // to be displayed on-screen somehow
+            string textAuthor = randomTextOutput[2]; // to be displayed on-screen somehow
+
             // debug all three
             UnityEngine.Debug.Log("Random Text Path: " + randomTextPath);
             UnityEngine.Debug.Log("Text Title: " + textTitle);
@@ -185,13 +192,10 @@ namespace LLMUnitySamples
 
             // extract a portion of the text corresponding to the plot stage
             string extractedText = ExtractText(randomTextPath);
-            
-            // TODO: APPEND AUTHOR AND TEXT NAME TO THE EXTRACTED TEXT
 
-            // TODO: APPEND EXTRACTED TEXT TO THE PLAYER'S MESSAGE WITH INSTRUCTIONS
+            // add the title, author, and extracted text to the augmented message
+            augmentedMessage += "\nUse the following sample, from " + textTitle + " by " + textAuthor + ", as inspiration:\n\n" + extractedText;
 
-            // append a string to the player's message telling the chatbot to prepend their message with "Response: "
-            string augmentedMessage = message + "\n Please start every response with: Gotcha!";
             // print the augmented message to the console
             UnityEngine.Debug.Log("Augmented_Message: " + augmentedMessage);
 
@@ -238,8 +242,11 @@ namespace LLMUnitySamples
             // get all the folders in the "Assets/Literature/(genre)" folder
             string[] folders = System.IO.Directory.GetDirectories(literaturePath);
 
+            // Create an instance of System.Random
+            System.Random random = new System.Random();
+
             // choose a random folder from the folders array
-            string randomFolder = folders[Random.Range(0, folders.Length)];
+            string randomFolder = folders[random.Next(0, folders.Length)];
 
             // save the folder name
             string folderName = System.IO.Path.GetFileName(randomFolder);
@@ -257,7 +264,7 @@ namespace LLMUnitySamples
             }
 
             // choose a random .txt file from the files array
-            string randomFile = files[Random.Range(0, files.Length)];
+            string randomFile = files[random.Next(0, files.Length)];
             // debug log the file path
             UnityEngine.Debug.Log("File Path: " + randomFile);
             
@@ -287,43 +294,43 @@ namespace LLMUnitySamples
             int totalLength = text.Length;
 
             // depending on the plot stage, calculate the start and end positions of the text to be extracted
-            // if plotStage is 1, extract the text from expositionStart to expositionEnd
+                // for example, if plotStage is "exposition", extract the text from expositionStart to expositionEnd
             // store the extracted text in a string variable
 
             string plotSegment = "";
             int start = -1;
             int end = -1;
-            if (plotStage == 1)
+            if (plotStage == "exposition")
             {
                 start = (int)(totalLength * expositionStart / 100.0);
                 end = (int)(totalLength * expositionEnd / 100.0);
             }
-            // if plotStage is 2, extract the text from conflictStart to conflictEnd
-            else if (plotStage == 2)
+            // if plotStage is "conflict", extract the text from conflictStart to conflictEnd
+            else if (plotStage == "conflict")
             {
                 start = (int)(totalLength * conflictStart / 100.0);
                 end = (int)(totalLength * conflictEnd / 100.0);
             }
-            // if plotStage is 3, extract the text from risingActionStart to risingActionEnd
-            else if (plotStage == 3)
+            // if plotStage is "rising action", extract the text from risingActionStart to risingActionEnd
+            else if (plotStage == "rising action")
             {
                 start = (int)(totalLength * risingActionStart / 100.0);
                 end = (int)(totalLength * risingActionEnd / 100.0);
             }
-            // if plotStage is 4, extract the text from climaxStart to climaxEnd
-            else if (plotStage == 4)
+            // if plotStage is "climax", extract the text from climaxStart to climaxEnd
+            else if (plotStage == "climax")
             {
                 start = (int)(totalLength * climaxStart / 100.0);
                 end = (int)(totalLength * climaxEnd / 100.0);
             }
-            // if plotStage is 5, extract the text from fallingActionStart to fallingActionEnd
-            else if (plotStage == 5)
+            // if plotStage is "falling action", extract the text from fallingActionStart to fallingActionEnd
+            else if (plotStage == "falling action")
             {
                 start = (int)(totalLength * fallingActionStart / 100.0);
                 end = (int)(totalLength * fallingActionEnd / 100.0);
             }
-            // if plotStage is 6, extract the text from resolutionStart to resolutionEnd
-            else if (plotStage == 6)
+            // if plotStage is "resolution", extract the text from resolutionStart to resolutionEnd
+            else if (plotStage == "resolution")
             {
                 start = (int)(totalLength * resolutionStart / 100.0);
                 end = (int)(totalLength * resolutionEnd / 100.0);
@@ -345,6 +352,8 @@ namespace LLMUnitySamples
                 we [assume] that words in sentences range from 4-7 letters. We also [assume]
                 that sentences have 15-20 words and paragraphs typically have 100-200 words and 5-6 sentences.
             */
+            // Create an instance of System.Random
+            System.Random random = new System.Random();
 
             // if the extracted text is longer than the maximum character length, limit it to the maximum character length
             if (plotSegment.Length > maxExtractCharLength)
@@ -353,7 +362,7 @@ namespace LLMUnitySamples
                 int maxStartPosition = plotSegment.Length - maxExtractCharLength;
 
                 // select a random starting point within the valid range
-                int randomStartPosition = Random.Range(0, maxStartPosition);
+                int randomStartPosition = random.Next(0, maxStartPosition);
 
                 // extract the chunk of text starting from the random point
                 plotSegment = plotSegment.Substring(randomStartPosition, maxExtractCharLength);

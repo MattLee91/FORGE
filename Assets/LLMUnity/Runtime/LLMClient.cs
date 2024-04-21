@@ -132,11 +132,11 @@ namespace LLMUnity
         public Dictionary<int, string> logitBias = null;
 
         /// <summary> the name of the player </summary>
-        [Chat] public string playerName = "user";
+        [Chat] public string playerName = "player";
         /// <summary> the name of the AI </summary>
-        [Chat] public string AIName = "assistant";
+        [Chat] public string AIName = "anvil";
         /// <summary> a description of the AI role. This defines the LLM/LLMClient system prompt </summary>
-        [TextArea(5, 10), Chat] public string prompt = "A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human's questions.";
+        [TextArea(5, 10), Chat] public string prompt = "Your task is to craft a narrative segment that could be found in a story at a given stage of plot. Input will contain a word length, stage of plot, and genre. You may also be given a literary reference to use as inspiration while drafting. Do not simply copy the reference to generate your segement, and do not use the same names from the reference in your segment. Your style of writing is playful and imaginitive, adapting to the provided genre. As you generate text, it is crucial to avoid any form of hate speech, discrimination, or harmful stereotypes. All text you generate should be appropriate, avoiding themes that could be considered offensive or insensitive.";
         /// <summary> option to set the number of tokens to retain from the prompt (nKeep) based on the LLM/LLMClient system prompt </summary>
         public bool setNKeepToPrompt = true;
 
