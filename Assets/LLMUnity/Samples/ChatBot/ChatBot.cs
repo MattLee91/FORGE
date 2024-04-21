@@ -190,13 +190,14 @@ namespace LLMUnitySamples
             // Define a callback that updates the AI bubble's text with the response
             Callback<string> callback = (response) =>
             {
+                // THIS CODE EXECUTES AS EVERY WORD THE AI GENERATES IS RECEIVED
                 aiBubble.SetText(response);
             };
 
             // Define a completion callback that can be used for any post-processing
             EmptyCallback completionCallback = () =>
             {
-                UnityEngine.Debug.Log("The AI replied");
+                // THIS CODE EXECUTES AFTER ALL WORDS OF THE AI'S RESPONSE ARE GENERATED
                 string result = aiBubble.GetText();
                 // USE THIS RESULT - AND PERHAPS ANOTHER - FOR PLATFORM GENERATION
                 UnityEngine.Debug.Log("AI Response: " + result);
