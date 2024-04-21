@@ -28,6 +28,14 @@ public class TextGenerator : MonoBehaviour
 
     void Update()
     {
+        if (!string.IsNullOrEmpty(GlobalVariables.instance.AITextResult))
+        {
+            if(SceneManager.GetActiveScene().name != "Start Map")
+            {
+                CreateTextObject();
+                GlobalVariables.instance.AITextResult = ""; // Clear the string after creating the object
+            }
+        }
         if (!string.IsNullOrEmpty(sharedString))
         {
             if(SceneManager.GetActiveScene().name != "Start Map")
@@ -43,7 +51,7 @@ public class TextGenerator : MonoBehaviour
         // Create a Text object
         GameObject textGO = new GameObject("TextObject");
         TextMesh textMesh = textGO.AddComponent<TextMesh>();
-        textMesh.text = sharedString;
+        textMesh.text = GlobalVariables.instance.AITextResult;
         textMesh.fontSize = 10;
 
         // Create a Box Collider that fits the text
@@ -114,6 +122,7 @@ public class TextGenerator : MonoBehaviour
         sharedString = s;
         textArray = sharedString.Split(' ');
         Debug.Log(sharedString);
+        GlobalVariables.instance.message = s;
     }
 
 }

@@ -81,9 +81,9 @@ namespace LLMUnitySamples
             }
             blockInput = true;
             // replace vertical_tab
-            string message = inputBubble.GetText().Replace("\v", "\n");
+            //GlobalVariables.instance.message = inputBubble.GetText().Replace("\v", "\n");
 
-            Bubble playerBubble = new Bubble(chatContainer, playerUI, "PlayerBubble", message);
+            Bubble playerBubble = new Bubble(chatContainer, playerUI, "PlayerBubble", GlobalVariables.instance.message);
             Bubble aiBubble = new Bubble(chatContainer, aiUI, "AIBubble", "...");
             chatBubbles.Add(playerBubble);
             chatBubbles.Add(aiBubble);
@@ -91,36 +91,36 @@ namespace LLMUnitySamples
             aiBubble.OnResize(UpdateBubblePositions);
 
             // print the message to the console
-            UnityEngine.Debug.Log("Original Message: " + message);
+            UnityEngine.Debug.Log("Original Message: " + GlobalVariables.instance.message);
             
             /* PLOT STAGE DETECTION */
             // check if the original message contains the word "exposition" (case-insensitive) and if it does, assign plotStage to it.
-            if (message.ToLower().Contains("exposition"))
+            if (GlobalVariables.instance.message.ToLower().Contains("exposition"))
             {
                 plotStage = "exposition";
             }
             // check if the original message contains the word "conflict" (case-insensitive) and if it does, assign plotStage to it.
-            else if (message.ToLower().Contains("conflict"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("conflict"))
             {
                 plotStage = "conflict";
             }
             // check if the original message contains the word "rising action" (case-insensitive) and if it does, assign plotStage to it.
-            else if (message.ToLower().Contains("rising action"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("rising action"))
             {
                 plotStage = "rising action";
             }
             // check if the original message contains the word "climax" (case-insensitive) and if it does, assign plotStage to it.
-            else if (message.ToLower().Contains("climax"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("climax"))
             {
                 plotStage = "climax";
             }
             // check if the original message contains the word "falling action" (case-insensitive) and if it does, assign plotStage to it.
-            else if (message.ToLower().Contains("falling action"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("falling action"))
             {
                 plotStage = "falling action";
             }
             // check if the original message contains the word "resolution" (case-insensitive) and if it does, assign plotStage to it.
-            else if (message.ToLower().Contains("resolution"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("resolution"))
             {
                 plotStage = "resolution";
             }
@@ -129,42 +129,42 @@ namespace LLMUnitySamples
 
             /* GENRE DETECTION */
             // check if the original message contains the word "mystery" (case-insensitive) and if it does, assign genre to "mystery".
-            if (message.ToLower().Contains("mystery"))
+            if (GlobalVariables.instance.message.ToLower().Contains("mystery"))
             {
                 genre = "mystery";
             }
             // check if the original message contains the word "fantasy" (case-insensitive) and if it does, assign genre to "fantasy".
-            else if (message.ToLower().Contains("fantasy"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("fantasy"))
             {
                 genre = "fantasy";
             }
             // check if the original message contains the word "science fiction" or "sci fi" or "sci-fi" or "scifi" (case-insensitive) and if it does, assign genre to "scifi".
-            else if (message.ToLower().Contains("science fiction") || message.ToLower().Contains("sci fi") || message.ToLower().Contains("sci-fi") || message.ToLower().Contains("scifi"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("science fiction") || GlobalVariables.instance.message.ToLower().Contains("sci fi") || GlobalVariables.instance.message.ToLower().Contains("sci-fi") || GlobalVariables.instance.message.ToLower().Contains("scifi"))
             {
                 genre = "sci_fi";
             }
             // check if the original message contains the word "romance" (case-insensitive) and if it does, assign genre to "romance".
-            else if (message.ToLower().Contains("romance"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("romance"))
             {
                 genre = "romance";
             }
             // check if the original message contains the word "horror" (case-insensitive) and if it does, assign genre to "horror".
-            else if (message.ToLower().Contains("horror"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("horror"))
             {
                 genre = "horror";
             }
             // check if the original message contains the word "comedy" (case-insensitive) and if it does, assign genre to "comedy".
-            else if (message.ToLower().Contains("comedy"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("comedy"))
             {
                 genre = "comedy";
             }
             // check if the original message contains the word "drama" (case-insensitive) and if it does, assign genre to "drama".
-            else if (message.ToLower().Contains("drama"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("drama"))
             {
                 genre = "drama";
             }
             // check if the original message contains the word "fairy tale" or "fairytale" or "fairy-tale" or "folk tale" or "folktale" or "folk-tale" (case-insensitive) and if it does, assign genre to "tale".
-            else if (message.ToLower().Contains("fairy tale") || message.ToLower().Contains("fairytale") || message.ToLower().Contains("fairy-tale") || message.ToLower().Contains("folk tale") || message.ToLower().Contains("folktale") || message.ToLower().Contains("folk-tale"))
+            else if (GlobalVariables.instance.message.ToLower().Contains("fairy tale") || GlobalVariables.instance.message.ToLower().Contains("fairytale") || GlobalVariables.instance.message.ToLower().Contains("fairy-tale") || GlobalVariables.instance.message.ToLower().Contains("folk tale") || GlobalVariables.instance.message.ToLower().Contains("folktale") || GlobalVariables.instance.message.ToLower().Contains("folk-tale"))
             {
                 genre = "tale";
             }
@@ -210,10 +210,11 @@ namespace LLMUnitySamples
             EmptyCallback completionCallback = () =>
             {
                 // THIS CODE EXECUTES AFTER ALL WORDS OF THE AI'S RESPONSE ARE GENERATED
-                string result = aiBubble.GetText();
+                GlobalVariables.instance.AITextResult = aiBubble.GetText();
                 // USE THIS RESULT - AND PERHAPS ANOTHER - FOR PLATFORM GENERATION
-                UnityEngine.Debug.Log("AI Response: " + result);
+                UnityEngine.Debug.Log("AI Response: " + GlobalVariables.instance.AITextResult);
                 // Any additional logic that should run after the full response is received
+                AllowInput();
             };
 
             // Call the Chat function with the callbacks
@@ -411,6 +412,7 @@ namespace LLMUnitySamples
             warmUpDone = true;
             inputBubble.SetPlaceHolderText("Message me");
             AllowInput();
+            UnityEngine.Debug.Log("Done loading!");
         }
 
         public void AllowInput()
@@ -480,6 +482,12 @@ namespace LLMUnitySamples
                 }
                 chatBubbles.RemoveRange(0, lastBubbleOutsideFOV + 1);
                 lastBubbleOutsideFOV = -1;
+            }
+            if(GlobalVariables.instance.message != "")
+            {
+                UnityEngine.Debug.Log("We're in here");
+                onInputFieldSubmit(GlobalVariables.instance.message);
+                GlobalVariables.instance.message = "";
             }
         }
 

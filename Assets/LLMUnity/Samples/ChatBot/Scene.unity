@@ -272,6 +272,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507661347}
   m_CullTransparentMesh: 1
+--- !u!1 &528578322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 528578324}
+  - component: {fileID: 528578323}
+  m_Layer: 0
+  m_Name: GlobalVariablesObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &528578323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528578322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ec5812dfc16524a9ae06118ca9f7a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInTextInput: 0
+  isInAnvilArea: 0
+  hasIntWithAnvil1: 0
+  AITextResult: 
+  message: 
+  levelCount: 3
+--- !u!4 &528578324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528578322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &574025142
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,12 +749,15 @@ MonoBehaviour:
   ignoreEos: 0
   nKeep: -1
   stop: []
-  grammarString: 
   playerName: user
   AIName: assistant
-  prompt: A chat between a curious human and an artificial intelligence assistant.
-    The assistant gives helpful, detailed, and polite answers to the human's questions.
-  chatTemplate: chatml
+  prompt: 'You are a creative writing assistant who drafts narrative segments that
+    are fragments of a story. Your writing style is playful and imaginative, yet
+    adaptable to various genres. Input contains genre, a literary reference for inspiration,
+    and category of plot: exposition, conflict, rising action, climax, falling action,
+    and resolution. Output contains only the narrative segment you wrote - no other
+    information. Always exclude any form of hate speech, discrimination, or harmful
+    stereotypes in your writing.'
   setNKeepToPrompt: 1
   chatTemplate: mistral chat
   grammarString: 
@@ -719,7 +772,7 @@ MonoBehaviour:
   lora: 
   contextSize: 512
   batchSize: 512
-  SelectedModel: 1
+  SelectedModel: 0
   modelProgress: 1
   modelCopyProgress: 1
   modelHide: 1
@@ -1236,3 +1289,4 @@ SceneRoots:
   - {fileID: 771101144}
   - {fileID: 180020065}
   - {fileID: 817827755}
+  - {fileID: 528578324}

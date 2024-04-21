@@ -9,6 +9,8 @@ public class GlobalVariables : MonoBehaviour
     public bool isInTextInput = false;
     public bool isInAnvilArea = false;
     public bool hasIntWithAnvil1 = false;
+    public string AITextResult = "";
+    public string message = "";
 
     public int levelCount = 3;
 
