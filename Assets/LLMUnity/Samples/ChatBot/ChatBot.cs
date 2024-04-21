@@ -170,10 +170,14 @@ namespace LLMUnitySamples
             // debug log the genre
             UnityEngine.Debug.Log("Genre: " + genre);
 
-            // find a random text corresponding to that genre
-            string randomTextPath = ChooseRandomText(genre);
+            // store the output of ChooseRandomText in an array.
+            // the first item is the text's file path, the second is the text's title, and the third is the text's author
+            string[] randomTextOutput = ChooseRandomText(genre);
 
-            // TODO: OBTAIN AUTHOR AND TEXT NAME AS WELL (MAKE OUTPUT OF ChooseRandomText() AN ARRAY)
+            // decompose the string array into three strings
+            string randomTextPath = randomTextOutput[0];
+            string textTitle = randomTextOutput[1];
+            string textAuthor = randomTextOutput[2];
 
             // extract a portion of the text corresponding to the plot stage
             string extractedText = ExtractText(randomTextPath);
@@ -211,7 +215,7 @@ namespace LLMUnitySamples
         }
 
         // a function to choose a random .txt file from the "Assets/Literature/(genre)" folder given genre as a string input
-        public string ChooseRandomText(string genre)
+        public string[] ChooseRandomText(string genre)
         {
             // the current relative path is: Assets\LLMUnity\Samples\ChatBot\ChatBot.cs
             // the relative path to the literature is: Assets\Literature
@@ -258,8 +262,8 @@ namespace LLMUnitySamples
             // debug log the file name
             UnityEngine.Debug.Log("File Name: " + fileName);
 
-            // return the path of the random .txt file
-            return randomFile;
+            // return the path of the random .txt file, the file name (the title of the text), and the folder name (the author of the text)
+            return new string[] {randomFile, fileName, folderName};
         }
 
         // a function to which, given a plot stage (integer) and file path (string), extracts a portion of text from the file
