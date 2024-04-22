@@ -8,6 +8,8 @@ TagManager:
   - Weapon
   - bossStart
   - Anvil
+  - Word
+  - Jump
   layers:
   - Default
   - TransparentFX

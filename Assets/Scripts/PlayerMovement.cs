@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnFire(InputValue value) //method called when bullet is fired
     {
+        if (GlobalVariables.instance.isInTextInput) {return;}
         if (!isAlive) {return;}
         var bullClone = GameObject.Find("Bullet2(Clone)");
         if(bullClone){
@@ -78,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnHamAttack(InputValue value){
+        if (GlobalVariables.instance.isInTextInput) {return;}
         if(!isAlive){
             return;
         }
@@ -160,6 +162,18 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("we are touching the anvil");
             GlobalVariables.instance.isInAnvilArea = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.gameObject.CompareTag("Jump"))
+        {
+            Debug.Log("Collided with object tagged: Jump");
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                Destroy(other.gameObject);
+            }
         }
     }
 

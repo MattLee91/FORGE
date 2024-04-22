@@ -8,6 +8,10 @@ public class Hammer : MonoBehaviour
         if(other.tag == "Enemy"){
             Destroy(other.gameObject);
         }
+        if(other.tag == "Word")
+        {
+            Destroy(other.gameObject);
+        }
         //Destroy(gameObject);
     }
 }

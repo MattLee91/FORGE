@@ -9375,7 +9375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01762e8828561ce45bc0375669a57372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Start Map 1
+  sceneName: AnvilCutscene
   levelLoadDelay: 0.5
 --- !u!212 &1291316513
 SpriteRenderer:
@@ -10221,6 +10221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86d3cfe18ab6ee4aaeea8e224c37f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loaded: 0
   sharedString: 
 --- !u!1 &1745801279
 GameObject:
@@ -20880,11 +20881,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358950451096792277, guid: ebfca20b50b84bb46be32ab60082c3d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.998751
+      value: -9.998749
       objectReference: {fileID: 0}
     - target: {fileID: 4358950451096792277, guid: ebfca20b50b84bb46be32ab60082c3d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.418612
+      value: -1.4170642
       objectReference: {fileID: 0}
     - target: {fileID: 4851143407277884707, guid: ebfca20b50b84bb46be32ab60082c3d3, type: 3}
       propertyPath: m_Follow
@@ -21122,6 +21123,10 @@ PrefabInstance:
     - target: {fileID: 4369771226871420794, guid: ba205384fa08fe34788d7ee59e2047e7, type: 3}
       propertyPath: m_Name
       value: Game Session
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139594425658593649, guid: ba205384fa08fe34788d7ee59e2047e7, type: 3}
+      propertyPath: playerLives
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5973434835828024315, guid: ba205384fa08fe34788d7ee59e2047e7, type: 3}
       propertyPath: m_IsActive

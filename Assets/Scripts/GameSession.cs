@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] int playerLives = 3;
+    [SerializeField] int playerLives = 100;
     [SerializeField] int score = 0;
     [SerializeField] int levelCounter = 3;
 

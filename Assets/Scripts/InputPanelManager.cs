@@ -26,20 +26,20 @@ public class InputPanelManager : MonoBehaviour
             GlobalVariables.instance.isInTextInput = false;
         }
 
-        /*if(GlobalVariables.instance.isInAnvilArea && Input.GetKeyDown(KeyCode.T))
-        {
-            if(!textInputPanel.activeSelf)
-            {
-                textInputPanel.SetActive(true);
-            }
-        }*/
-        if(Input.GetKeyDown(KeyCode.T))
+        if(GlobalVariables.instance.isInAnvilArea && Input.GetKeyDown(KeyCode.T))
         {
             if(!textInputPanel.activeSelf)
             {
                 textInputPanel.SetActive(true);
             }
         }
+        /*if(Input.GetKeyDown(KeyCode.T))
+        {
+            if(!textInputPanel.activeSelf)
+            {
+                textInputPanel.SetActive(true);
+            }
+        }*/
 
         //if(Input.GetKeyDown(KeyCode.Return))
         //{
