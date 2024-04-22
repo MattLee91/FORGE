@@ -9,8 +9,6 @@ using UnityEngine.Tilemaps;
 public class PlayerMovement : MonoBehaviour
 {
     public AudioSource jumpAudioSource;
-
-
     public PlatformBounce bouncePlatform;
 
     public Tilemap ptilemap;

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed6623eee53ff146abf9af128c1c246, type: 3}
+  m_Name: Bounce
+  m_EditorClassIdentifier: 
+  cell0: {x: -1, y: 0, z: 0}
+  tile0: {fileID: 11400000, guid: d4965ed71b2a074429316cc1cdd26967, type: 2}
+  cell1: {x: 0, y: 0, z: 0}
+  tile1: {fileID: 11400000, guid: d4965ed71b2a074429316cc1cdd26967, type: 2}
+  cell2: {x: 1, y: 0, z: 0}
+  tile2: {fileID: 11400000, guid: d4965ed71b2a074429316cc1cdd26967, type: 2}
+  cell3: {x: 0, y: 1, z: 0}
+  tile3: {fileID: 11400000, guid: 401afda4a42083545b8abe88d4a29089, type: 2}
