@@ -4,9 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
-
 public class PlayerMovement : MonoBehaviour
 {
+    public AudioSource jumpAudioSource;
     public GameObject bossStarter;
 
     public GameObject defCam;
@@ -75,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
         if(value.isPressed) //is the jump button pressed?
         {
             myRigidbody.velocity += new Vector2 (0f, jumpSpeed);
+            // play the jump sound effect from the JumpSFX game object
+            jumpAudioSource.Play();
         }
     }
 
