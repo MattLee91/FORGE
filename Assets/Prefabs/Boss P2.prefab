@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9002542582752304753}
   - component: {fileID: 4878375800299688343}
   - component: {fileID: 1655071062333427237}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Smiler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 6821252405108934225}
   - component: {fileID: 3108297629307530995}
   - component: {fileID: 2454429815576495735}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Eye 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 2376876384613763379}
   - component: {fileID: 1477093909076088715}
   - component: {fileID: 6053425820338962324}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Eye 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702df03de35591342a7af042cb7b90cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boss: {fileID: 0}
 --- !u!1 &7414561571263541487
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +437,7 @@ GameObject:
   - component: {fileID: 5197119275748221306}
   - component: {fileID: 6224234909542679815}
   - component: {fileID: 777977840664026027}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Eyebrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +543,7 @@ GameObject:
   - component: {fileID: 1350398589718305602}
   - component: {fileID: 6340109262180918632}
   - component: {fileID: 2815952006744295877}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Eyebrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
