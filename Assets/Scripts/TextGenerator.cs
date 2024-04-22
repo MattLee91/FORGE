@@ -60,7 +60,7 @@ public class TextGenerator : MonoBehaviour
             GameObject textGO = new GameObject("TextObject");
             TextMesh textMesh = textGO.AddComponent<TextMesh>();
             textMesh.text = textArray[i];
-            textMesh.fontSize = 8;
+            textMesh.fontSize = 9;
 
         // Create a Box Collider that fits the text
             Bounds textBounds = new Bounds(textMesh.transform.position, Vector3.zero);
