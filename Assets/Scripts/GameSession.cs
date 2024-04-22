@@ -69,8 +69,8 @@ public class GameSession : MonoBehaviour
     void TakeLife()
     {
         playerLives--;
-        levelCounter--;
-        GlobalVariables.instance.levelCount--;
+        //levelCounter--;
+        //GlobalVariables.instance.levelCount--;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
         livesText.text = playerLives.ToString();

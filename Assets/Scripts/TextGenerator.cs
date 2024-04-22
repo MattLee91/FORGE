@@ -15,7 +15,7 @@ public class TextGenerator : MonoBehaviour
     public string sharedString;
 
     string[] textArray = new string[10];
-    float[] xCoords = {0f, 7f, 14f, 19f, 23.5f, 33f, 28f, 34f, 39f, 46.5f};
+    float[] xCoords = {0f, 7f, 14f, 18f, 23.5f, 33f, 28f, 34f, 39f, 46.5f};
     float[] yCoords = {-0.5f,2f,5f,2.5f,-1.5f,-0.5f,2f,3.5f,4.5f,0.5f};
 
     private void Awake()
@@ -60,7 +60,7 @@ public class TextGenerator : MonoBehaviour
             GameObject textGO = new GameObject("TextObject");
             TextMesh textMesh = textGO.AddComponent<TextMesh>();
             textMesh.text = textArray[i];
-            textMesh.fontSize = 9;
+            textMesh.fontSize = 8;
 
         // Create a Box Collider that fits the text
             Bounds textBounds = new Bounds(textMesh.transform.position, Vector3.zero);
