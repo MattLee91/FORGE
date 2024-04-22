@@ -42,6 +42,7 @@ namespace LLMUnitySamples
         private BubbleUI playerUI, aiUI;
         private bool warmUpDone = false;
         private int lastBubbleOutsideFOV = -1;
+        //public static ChatBot instance;
 
         void Start()
         {
@@ -490,6 +491,19 @@ namespace LLMUnitySamples
                 GlobalVariables.instance.message = "";
             }
         }
+
+        /*void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }*/
 
         public void ExitGame()
         {
