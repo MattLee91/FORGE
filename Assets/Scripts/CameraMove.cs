@@ -11,6 +11,7 @@ public class CameraMove : MonoBehaviour
     public float speed = 1f;
 
      Vector3 upLeft = new Vector3(-1, 1, 0);
+    [SerializeField] Vector3 upRight = new Vector3(1, 1, 0);
     void Start()
     {
 
@@ -43,7 +44,7 @@ public class CameraMove : MonoBehaviour
             // Increment the elapsed time
             elapsedTime += Time.deltaTime;
 
-            transform.Translate(upLeft * speed * Time.deltaTime);
+            transform.Translate(upRight * speed * Time.deltaTime);
 
             // Wait for the next frame
             yield return null;

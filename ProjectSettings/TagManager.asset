@@ -8,6 +8,7 @@ TagManager:
   - Weapon
   - bossStart
   - Anvil
+  - bossHit
   layers:
   - Default
   - TransparentFX
