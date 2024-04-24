@@ -28744,6 +28744,13 @@ MonoBehaviour:
   AITextResult: 
   message: 
   levelCount: 3
+  levelNames:
+  - Start Map 1
+  - Upscroll Map
+  - BossBattle
+  - Falling Map
+  - End Map
+  levelNameCounter: 0
 --- !u!4 &2012555166
 Transform:
   m_ObjectHideFlags: 0
