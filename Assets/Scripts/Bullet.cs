@@ -35,8 +35,9 @@ public class Bullet : MonoBehaviour
         if(other.tag == "Enemy")
         {
             Destroy(other.gameObject);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        
     }
 
     void OnCollisionEnter2D(Collision2D other) 

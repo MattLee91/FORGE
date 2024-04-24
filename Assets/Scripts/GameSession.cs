@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] int playerLives = 3;
+    [SerializeField] int playerLives = 100;
     [SerializeField] int score = 0;
     [SerializeField] int levelCounter = 3;
 
@@ -69,8 +69,8 @@ public class GameSession : MonoBehaviour
     void TakeLife()
     {
         playerLives--;
-        levelCounter--;
-        GlobalVariables.instance.levelCount--;
+        //levelCounter--;
+        //GlobalVariables.instance.levelCount--;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
         livesText.text = playerLives.ToString();

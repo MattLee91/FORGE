@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using LLMUnitySamples;
 using UnityEngine;
 
 public class InputPanelManager : MonoBehaviour
@@ -23,17 +25,26 @@ public class InputPanelManager : MonoBehaviour
         {
             GlobalVariables.instance.isInTextInput = false;
         }
-        if(Input.GetKeyDown(KeyCode.T))
+
+        if(GlobalVariables.instance.isInAnvilArea && Input.GetKeyDown(KeyCode.T))
         {
             if(!textInputPanel.activeSelf)
             {
                 textInputPanel.SetActive(true);
             }
         }
-        if(Input.GetKeyDown(KeyCode.Return))
+        /*if(Input.GetKeyDown(KeyCode.T))
         {
-            textInputPanel.SetActive(false);
-        }
+            if(!textInputPanel.activeSelf)
+            {
+                textInputPanel.SetActive(true);
+            }
+        }*/
+
+        //if(Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    textInputPanel.SetActive(false);
+        //}
     }
 
     public void ReadStringInput(string s)

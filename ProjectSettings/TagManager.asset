@@ -7,6 +7,10 @@ TagManager:
   - Enemy
   - Weapon
   - bossStart
+  - Anvil
+  - bossHit
+  - Word
+  - Jump
   layers:
   - Default
   - TransparentFX
@@ -25,7 +29,6 @@ TagManager:
   - Interactables
   - Anvil
   - Camera
-  - 
   - 
   - 
   - 

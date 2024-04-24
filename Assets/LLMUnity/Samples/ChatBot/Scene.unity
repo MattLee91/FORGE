@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -272,6 +272,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507661347}
   m_CullTransparentMesh: 1
+--- !u!1 &528578322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 528578324}
+  - component: {fileID: 528578323}
+  m_Layer: 0
+  m_Name: GlobalVariablesObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &528578323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528578322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ec5812dfc16524a9ae06118ca9f7a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInTextInput: 0
+  isInAnvilArea: 0
+  hasIntWithAnvil1: 0
+  AITextResult: 
+  message: 
+  levelCount: 3
+--- !u!4 &528578324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528578322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &574025142
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,17 +749,15 @@ MonoBehaviour:
   ignoreEos: 0
   nKeep: -1
   stop: []
-  playerName: player
-  AIName: anvil
-  prompt: Your task is to craft a narrative segment that could be found in a story
-    at a given stage of plot. Input will contain a word length, stage of plot, and
-    genre. You may also be given a literary reference to use as inspiration while
-    drafting. Do not simply copy the reference to generate your segement, and do
-    not use the same names from the reference in your segment. Your style of writing
-    is playful and imaginitive, adapting to the provided genre. As you generate text,
-    it is crucial to avoid any form of hate speech, discrimination, or harmful stereotypes.
-    All text you generate should be appropriate, avoiding themes that could be considered
-    offensive or insensitive.
+  playerName: user
+  AIName: assistant
+  prompt: 'You are a creative writing assistant who drafts narrative segments that
+    are fragments of a story. Your writing style is playful and imaginative, yet
+    adaptable to various genres. Input contains genre, a literary reference for inspiration,
+    and category of plot: exposition, conflict, rising action, climax, falling action,
+    and resolution. Output contains only the narrative segment you wrote - no other
+    information. Always exclude any form of hate speech, discrimination, or harmful
+    stereotypes in your writing.'
   setNKeepToPrompt: 1
   chatTemplate: mistral chat
   grammarString: 
@@ -724,7 +772,7 @@ MonoBehaviour:
   lora: 
   contextSize: 512
   batchSize: 512
-  SelectedModel: 0
+  SelectedModel: 1
   modelProgress: 1
   modelCopyProgress: 1
   modelHide: 1
@@ -1241,3 +1289,4 @@ SceneRoots:
   - {fileID: 771101144}
   - {fileID: 180020065}
   - {fileID: 817827755}
+  - {fileID: 528578324}
