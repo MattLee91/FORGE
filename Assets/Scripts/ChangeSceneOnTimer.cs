@@ -23,6 +23,10 @@ public class ChangeSceneOnTimer : MonoBehaviour
             {
                 SceneManager.LoadScene("Start Menu");
             }
+            else if(SceneManager.GetActiveScene().name == "IntroScene")
+            {
+                SceneManager.LoadScene("Start Map");
+            }
             else
             {
                 Debug.Log("Loading level with name: " + GlobalVariables.instance.levelNames[GlobalVariables.instance.levelNameCounter]);
