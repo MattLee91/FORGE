@@ -19,7 +19,8 @@ public class ChangeSceneOnTimer : MonoBehaviour
         changeTime -= Time.deltaTime;
         if (changeTime <= 0)
         {
-            SceneManager.LoadScene(sceneName);
+            Debug.Log("Loading level with name: " + GlobalVariables.instance.levelNames[GlobalVariables.instance.levelNameCounter]);
+            SceneManager.LoadScene(GlobalVariables.instance.levelNames[GlobalVariables.instance.levelNameCounter]);
         }
     }
 }

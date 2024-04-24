@@ -160,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
 
     void LevelLoop()
     {
-        if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Anvil")))
+        if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("LevelExit")))
         {
             isAlive = false;
             FindObjectOfType<GameSession>().ProcessLevelLoop();

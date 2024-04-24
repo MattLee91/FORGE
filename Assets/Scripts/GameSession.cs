@@ -54,9 +54,11 @@ public class GameSession : MonoBehaviour
         }
         else
         {
-            levelCounter = 3;
+            levelCounter = 1;
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene("Start Menu");
+            //SceneManager.LoadScene("Start Menu");
+            Debug.Log("Processing level loop");
+            GlobalVariables.instance.levelNameCounter += 1;
         }
     }
 

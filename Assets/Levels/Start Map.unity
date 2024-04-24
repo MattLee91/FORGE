@@ -667,7 +667,14 @@ MonoBehaviour:
   hasIntWithAnvil1: 0
   AITextResult: 
   message: 
-  levelCount: 3
+  levelCount: 1
+  levelNames:
+  - Start Map 1
+  - Upscroll Map
+  - BossBattle
+  - Falling Map
+  - End Map
+  levelNameCounter: 0
 --- !u!4 &266604724
 Transform:
   m_ObjectHideFlags: 0
@@ -21045,7 +21052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358950451096792277, guid: ebfca20b50b84bb46be32ab60082c3d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4170642
+      value: -1.4170995
       objectReference: {fileID: 0}
     - target: {fileID: 4851143407277884707, guid: ebfca20b50b84bb46be32ab60082c3d3, type: 3}
       propertyPath: m_Follow
@@ -21291,6 +21298,10 @@ PrefabInstance:
     - target: {fileID: 5139594425658593649, guid: ba205384fa08fe34788d7ee59e2047e7, type: 3}
       propertyPath: playerLives
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139594425658593649, guid: ba205384fa08fe34788d7ee59e2047e7, type: 3}
+      propertyPath: levelCounter
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5973434835828024315, guid: ba205384fa08fe34788d7ee59e2047e7, type: 3}
       propertyPath: m_IsActive

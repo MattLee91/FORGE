@@ -397,7 +397,7 @@ MonoBehaviour:
   hasIntWithAnvil1: 0
   AITextResult: 
   message: 
-  levelCount: 3
+  levelCount: 1
 --- !u!4 &290056371
 Transform:
   m_ObjectHideFlags: 0

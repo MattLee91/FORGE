@@ -560,7 +560,16 @@ MonoBehaviour:
   isInTextInput: 0
   isInAnvilArea: 0
   hasIntWithAnvil1: 0
-  levelCount: 3
+  AITextResult: 
+  message: 
+  levelCount: 1
+  levelNames:
+  - Start Map 1
+  - Upscroll Map
+  - BossBattle
+  - Falling Map
+  - End Map
+  levelNameCounter: 0
 --- !u!4 &266604724
 Transform:
   m_ObjectHideFlags: 0
@@ -9466,6 +9475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86d3cfe18ab6ee4aaeea8e224c37f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loaded: 0
   sharedString: 
 --- !u!1 &1752252544
 GameObject:
@@ -20026,11 +20036,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358950451096792277, guid: ebfca20b50b84bb46be32ab60082c3d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.998751
+      value: -9.998749
       objectReference: {fileID: 0}
     - target: {fileID: 4358950451096792277, guid: ebfca20b50b84bb46be32ab60082c3d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.419836
+      value: -1.4170642
       objectReference: {fileID: 0}
     - target: {fileID: 4851143407277884707, guid: ebfca20b50b84bb46be32ab60082c3d3, type: 3}
       propertyPath: m_Follow

@@ -11,8 +11,9 @@ public class GlobalVariables : MonoBehaviour
     public bool hasIntWithAnvil1 = false;
     public string AITextResult = "";
     public string message = "";
-
-    public int levelCount = 3;
+    public int levelCount = 1;
+    public string[] levelNames = {"Start Map 1", "Upscroll Map", "BossBattle", "Falling Map", "End Map"};
+    public int levelNameCounter = 0;
 
     private void Awake()
     {

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using Unity.Collections.LowLevel.Unsafe;
+using Unity.VisualScripting;
 
 public class TextGenerator : MonoBehaviour
 {
@@ -35,11 +36,16 @@ public class TextGenerator : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(GlobalVariables.instance.AITextResult) && !loaded)
         {
-            if(SceneManager.GetActiveScene().name != "Start Map")
+            if(SceneManager.GetActiveScene().name == "Start Map 1")
             {
-                CreateTextObject();
+                CreateTextSide();
                 loaded = true;
                 //GlobalVariables.instance.AITextResult = ""; // Clear the string after creating the object
+            }
+            if(SceneManager.GetActiveScene().name == "Upscroll Map")
+            {
+                CreateTextUp();
+                loaded = true;
             }
         }
         /*if (!string.IsNullOrEmpty(sharedString))
@@ -52,7 +58,7 @@ public class TextGenerator : MonoBehaviour
         }*/
     }
 
-    void CreateTextObject()
+    void CreateTextSide()
     {
         textArray = parseInput(GlobalVariables.instance.AITextResult);
         for(int i=0; i<textArray.Length;i++)
@@ -89,7 +95,44 @@ public class TextGenerator : MonoBehaviour
         }
     }
 
-    void CreateTextSide()
+    void CreateTextUp()
+    {
+        textArray = parseInput(GlobalVariables.instance.AITextResult);
+        for(int i=0; i<textArray.Length;i++)
+        {
+            GameObject textGO = new GameObject("TextObject");
+            TextMesh textMesh = textGO.AddComponent<TextMesh>();
+            textMesh.text = textArray[i];
+            textMesh.fontSize = 9;
+
+        // Create a Box Collider that fits the text
+            Bounds textBounds = new Bounds(textMesh.transform.position, Vector3.zero);
+            MeshRenderer meshRenderer = textGO.GetComponent<MeshRenderer>();
+            textBounds = meshRenderer.bounds;
+
+            BoxCollider2D boxCollider2D = textGO.AddComponent<BoxCollider2D>();
+            boxCollider2D.size = new Vector2(textBounds.size.x, textBounds.size.y);
+            boxCollider2D.offset = new Vector2(textBounds.center.x, textBounds.center.y);
+            boxCollider2D.gameObject.layer = LayerMask.NameToLayer("Ground");
+            boxCollider2D.gameObject.tag = "Word";
+
+            Rigidbody2D rigidbody2D = textGO.AddComponent<Rigidbody2D>();
+            rigidbody2D.bodyType = RigidbodyType2D.Static;
+            rigidbody2D.gameObject.layer = LayerMask.NameToLayer("Ground");
+            rigidbody2D.gameObject.tag = "Word";
+
+            MeshRenderer textRenderer = textGO.GetComponent<MeshRenderer>();
+            int platformLayerID = SortingLayer.NameToID("Platforms");
+            textRenderer.sortingLayerID = platformLayerID;
+            textRenderer.sortingOrder = 0; // Adjust this value to control the sorting order
+
+            Vector3 setPosition = new Vector3(xCoords[i],yCoords[i],0);
+
+            textGO.transform.position = setPosition;
+        }
+    }
+
+    /*void CreateTextSide()
     {
 
         for(int i=0; i<textArray.Length; i++)
@@ -118,7 +161,7 @@ public class TextGenerator : MonoBehaviour
 
             textGO.transform.position = setPosition;
         }
-    }
+    }*/
 
     public void ReadStringInput(string s)
     {
