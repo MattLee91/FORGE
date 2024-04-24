@@ -184,6 +184,17 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("we are touching the anvil");
             GlobalVariables.instance.isInAnvilArea = true;
         }
+        if(other.tag == "Deathplat")
+        {
+            isAlive = false; //no longer alive
+            myAnimator.SetTrigger("Dying"); //trigger dying state
+            myBodyCollider.enabled = false;
+            myFeetCollider.enabled = false;
+            myRigidbody.velocity = deathKick; //trigger death animation
+            
+            
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) 

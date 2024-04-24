@@ -19,8 +19,15 @@ public class ChangeSceneOnTimer : MonoBehaviour
         changeTime -= Time.deltaTime;
         if (changeTime <= 0)
         {
-            Debug.Log("Loading level with name: " + GlobalVariables.instance.levelNames[GlobalVariables.instance.levelNameCounter]);
-            SceneManager.LoadScene(GlobalVariables.instance.levelNames[GlobalVariables.instance.levelNameCounter]);
+            if(SceneManager.GetActiveScene().name == "EndCutscene")
+            {
+                SceneManager.LoadScene("Start Menu");
+            }
+            else
+            {
+                Debug.Log("Loading level with name: " + GlobalVariables.instance.levelNames[GlobalVariables.instance.levelNameCounter]);
+                SceneManager.LoadScene(GlobalVariables.instance.levelNames[GlobalVariables.instance.levelNameCounter]);
+            }
         }
     }
 }

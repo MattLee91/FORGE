@@ -11,6 +11,7 @@ TagManager:
   - bossHit
   - Word
   - Jump
+  - Deathplat
   layers:
   - Default
   - TransparentFX
